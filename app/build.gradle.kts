@@ -47,18 +47,16 @@ dependencies {
     implementation("androidx.navigation:navigation-ui:2.7.7")
 
     // Amplify core dependency
-    implementation ("com.amplifyframework:core:ANDROID_VERSION")
-    implementation ("com.amplifyframework:aws-auth-cognito:2.14.11")
+    implementation("com.amplifyframework:core:ANDROID_VERSION")
+    implementation("com.amplifyframework:aws-auth-cognito:2.14.11")
     //implementation("com.amazonaws:aws-android-sdk-auth:2.14.11")
 
-    implementation ("com.amplifyframework:aws-api:2.14.11")
-    implementation ("com.amplifyframework:aws-datastore:2.14.11")
+    implementation("com.amplifyframework:aws-api:2.14.11")
+    implementation("com.amplifyframework:aws-datastore:2.14.11")
 
     // Support for Java 8 features
-    coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.0.4")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-
-
 }
