@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.elimatsim"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -45,8 +45,15 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.navigation:navigation-fragment:2.7.7")
     implementation("androidx.navigation:navigation-ui:2.7.7")
+
     // Amplify core dependency
     implementation ("com.amplifyframework:core:ANDROID_VERSION")
+    implementation ("com.amplifyframework:aws-auth-cognito:2.14.11")
+    //implementation("com.amazonaws:aws-android-sdk-auth:2.14.11")
+
+    implementation ("com.amplifyframework:aws-api:2.14.11")
+    implementation ("com.amplifyframework:aws-datastore:2.14.11")
+
     // Support for Java 8 features
     coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.0.4")
     testImplementation("junit:junit:4.13.2")

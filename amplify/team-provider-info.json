@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-elimatsim-dev-161848-authRole",
+      "UnauthRoleArn": "arn:aws:iam::637423192234:role/amplify-elimatsim-dev-161848-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::637423192234:role/amplify-elimatsim-dev-161848-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-elimatsim-dev-161848-deployment",
+      "UnauthRoleName": "amplify-elimatsim-dev-161848-unauthRole",
+      "StackName": "amplify-elimatsim-dev-161848",
+      "StackId": "arn:aws:cloudformation:us-east-1:637423192234:stack/amplify-elimatsim-dev-161848/e6236460-e62d-11ee-a0bb-12d11f418711",
+      "AmplifyAppId": "d1v6jv44gg9em4"
+    },
+    "categories": {
+      "auth": {
+        "elimatsimf0ac63c3": {}
+      }
+    }
+  }
+}
