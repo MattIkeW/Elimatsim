@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Elimatsim Investor</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_farmers">Farmers</string>
+    <string name="menu_transactions">Transactions</string>
+    <string name="menu_settings">Settings</string>
+
+    <string name="fab_content_description">
+        This button will open a few sub categories to filter results on the farmer page in Investor.
+    </string>
+    <string name="image_view_item_transform_content_description">
+       This is a Farmer. This will contain an image/avatar, name and color/category.
+    </string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="signUp">Not yet registered? SignUp Now</string>
+</resources>
