@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Elimatsim"
         tools:targetApi="31">
-        <!-- android:name=".AmplifyLogin -->
+        <!-- android:name=".AmplifyLogin / .MainActivity -->
         <activity
-            android:name=".MainActivity"
+            android:name=".AmplifyLogin"
             android:exported="true"
             android:resizeableActivity="true"
             android:theme="@style/Theme.Elimatsim.NoActionBar"

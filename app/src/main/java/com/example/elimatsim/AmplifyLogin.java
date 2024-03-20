@@ -17,6 +17,7 @@ public class AmplifyLogin extends Application {
     public void onCreate() {
         super.onCreate();
 
+
         try {
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.configure(getApplicationContext());
@@ -24,6 +25,15 @@ public class AmplifyLogin extends Application {
         } catch (AmplifyException error) {
             Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
         }
+
+        // Code button listeners to fetch User input into the following variables
+        // R.id.signupButton    R.id.loginButton
+        String uName;
+        String name;
+        String pass;
+        String email;
+        String phone;
+
 
         Amplify.Auth.fetchAuthSession(
                 result -> Log.i("AmplifyQuickstart", result.toString()),
