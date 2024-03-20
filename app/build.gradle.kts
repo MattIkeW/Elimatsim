@@ -32,12 +32,17 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion ="1.2.0"
     }
 }
 
 dependencies {
 
     implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.compose.material3:material3:1.2.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
@@ -48,6 +53,8 @@ dependencies {
 
     // Amplify core dependency
     implementation("com.amplifyframework:core:ANDROID_VERSION")
+    implementation("com.amplifyframework.ui:liveness:1.2.1")
+    implementation("com.amplifyframework.ui:authenticator:1.1.0")
     implementation("com.amplifyframework:aws-auth-cognito:2.14.11")
     //implementation("com.amazonaws:aws-android-sdk-auth:2.14.11")
 
