@@ -52,8 +52,9 @@ dependencies {
     implementation("androidx.navigation:navigation-ui:2.7.7")
 
     // Amplify core dependency
-    implementation("com.amplifyframework:core:ANDROID_VERSION")
+    implementation("com.amplifyframework:core:2.14.11")
     implementation("com.amplifyframework.ui:liveness:1.2.1")
+    implementation("com.amplifyframework:aws-api:2.14.11")
     implementation("com.amplifyframework.ui:authenticator:1.1.0")
     implementation("com.amplifyframework:aws-auth-cognito:2.14.11")
     //implementation("com.amazonaws:aws-android-sdk-auth:2.14.11")

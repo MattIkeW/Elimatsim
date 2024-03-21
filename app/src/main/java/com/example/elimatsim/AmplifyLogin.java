@@ -1,9 +1,12 @@
 package com.example.elimatsim;
 
 import android.app.Application;
+import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 
 import com.amplifyframework.AmplifyException;
+import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.auth.AuthUserAttribute;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
@@ -14,11 +17,12 @@ import java.util.ArrayList;
 
 
 public class AmplifyLogin extends Application {
+    @Override
     public void onCreate() {
         super.onCreate();
 
-
         try {
+            Amplify.addPlugin(new AWSApiPlugin());
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.configure(getApplicationContext());
             Log.i("Elimatsim", "Initialized Amplify");
@@ -33,7 +37,6 @@ public class AmplifyLogin extends Application {
         String pass;
         String email;
         String phone;
-
 
         Amplify.Auth.fetchAuthSession(
                 result -> Log.i("AmplifyQuickstart", result.toString()),
