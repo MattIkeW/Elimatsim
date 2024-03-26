@@ -39,7 +39,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/username"
+                android:id="@+id/loguser"
                 android:background="@drawable/custom_edittext"
                 android:drawableStart="@drawable/ic_camera_black_24dp"
                 android:drawablePadding="8dp"
@@ -54,7 +54,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/password"
+                android:id="@+id/logpass"
                 android:background="@drawable/custom_edittext"
                 android:drawableStart="@drawable/ic_settings_black_24dp"
                 android:drawablePadding="8dp"

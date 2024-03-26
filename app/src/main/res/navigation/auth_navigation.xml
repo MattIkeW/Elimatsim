@@ -5,17 +5,35 @@
     android:id="@+id/auth_navigation"
     app:startDestination="@+id/nav_login">
 
+    <include app:graph="@navigation/mobile_navigation" />
+
     <fragment
         android:id="@+id/nav_login"
         android:label="login"
-        tools:layout="@layout/login_main"/>
+        android:name="com.example.elimatsim.ui.AuthenticationFragment"
+        tools:layout="@layout/login_main">
+
+        <action
+            android:id="@+id/action_login_to_signup"
+            app:destination="@id/nav_signup" />
+
+        <action
+            android:id="@+id/action_login_to_mobile"
+            app:destination="@id/mobile_navigation" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/nav_signup"
         android:label="signup"
-        tools:layout="@layout/signup_main"/>
+        tools:layout="@layout/signup_main">
 
-    <include app:graph="@navigation/mobile_navigation" />
+        <!-- Action to navigate from sign up to login. -->
+        <action
+            android:id="@+id/action_signup_to_login"
+            app:destination="@id/nav_login" />
 
+
+    </fragment>
 
 </navigation>

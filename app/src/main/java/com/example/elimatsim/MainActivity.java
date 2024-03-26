@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
                             "This will be the filter button", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show());
         }
+
+        // Nav Host fragment Content main is a place holder for all the different views / classes
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().
                 findFragmentById(R.id.nav_host_fragment_content_main);
         assert navHostFragment != null;
