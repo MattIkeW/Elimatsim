@@ -15,7 +15,6 @@ import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 
 import java.util.ArrayList;
 
-
 public class AmplifyLogin extends Application {
     @Override
     public void onCreate() {
@@ -29,14 +28,6 @@ public class AmplifyLogin extends Application {
         } catch (AmplifyException error) {
             Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
         }
-
-        // Code button listeners to fetch User input into the following variables
-        // R.id.signupButton    R.id.loginButton
-        String uName;
-        String name;
-        String pass;
-        String email;
-        String phone;
 
         Amplify.Auth.fetchAuthSession(
                 result -> Log.i("AmplifyQuickstart", result.toString()),

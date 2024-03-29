@@ -14,11 +14,12 @@
         android:layout_marginRight="@dimen/fragment_horizontal_margin"
         android:layout_weight="1"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/mobile_navigation" />
+        app:navGraph="@navigation/auth_navigation" />
 
-    <com.google.android.material.navigation.NavigationView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"/>
+<!-- THIS CODE IS THE NAVIGATION SIDE BAR -->
+<!--<com.google.android.material.navigation.NavigationView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_gravity="start"/>-->
 
 </LinearLayout>

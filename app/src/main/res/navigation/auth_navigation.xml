@@ -10,7 +10,6 @@
     <fragment
         android:id="@+id/nav_login"
         android:label="login"
-        android:name="com.example.elimatsim.ui.AuthenticationFragment"
         tools:layout="@layout/login_main">
 
         <action
@@ -32,7 +31,6 @@
         <action
             android:id="@+id/action_signup_to_login"
             app:destination="@id/nav_login" />
-
 
     </fragment>
 
