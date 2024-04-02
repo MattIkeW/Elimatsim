@@ -32,15 +32,18 @@ public class SignUpViewModel extends ViewModel {
      * @return      The return type is a boolean on successful sign in.
      */
     public boolean signIn(String uName, String pWord,
-                          String email, String pN, String name){
+                          String email, String pN,
+                          String name){
 
         ArrayList<AuthUserAttribute> attributes = new ArrayList<>();
         attributes.add(new AuthUserAttribute(AuthUserAttributeKey.email(), email));
         attributes.add(new AuthUserAttribute(AuthUserAttributeKey.phoneNumber(), pN));
         attributes.add(new AuthUserAttribute(AuthUserAttributeKey.name(), name));
 
-        Amplify.Auth.signUp(uName, pWord,
-                AuthSignUpOptions.builder().userAttributes(attributes).build(),
+        Amplify.Auth.signUp(uName, pWord, AuthSignUpOptions
+                        .builder()
+                        .userAttributes(attributes)
+                        .build(),
                 result -> {
                     Log.i("AuthQuickstart", result.toString());
                     if (result.isSignUpComplete()){
@@ -58,8 +61,7 @@ public class SignUpViewModel extends ViewModel {
                 }
         );
 
-        Amplify.Auth.confirmSignUp(
-                "username",
+        Amplify.Auth.confirmSignUp(uName,
                 "the code you received via email",
                 result -> Log.i("AuthQuickstart",
                         result.isSignUpComplete()

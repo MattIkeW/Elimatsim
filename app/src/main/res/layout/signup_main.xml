@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@mipmap/app_launcher_foreground"
-    tools:context=".MainActivity">
+    tools:context=".AuthenticationActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
