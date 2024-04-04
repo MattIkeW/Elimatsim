@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.amplifyframework.AmplifyException;
@@ -19,8 +20,10 @@ public class AuthenticationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ContentAuthBinding binding = ContentAuthBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+//        ContentAuthBinding binding = ContentAuthBinding.inflate(getLayoutInflater());
+//        setContentView(binding.getRoot());
+
+        setContentView(R.layout.login_main);
 
         new Thread(() -> {
             try {
@@ -38,13 +41,14 @@ public class AuthenticationActivity extends AppCompatActivity {
             );
         }).start();
 
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().
-                findFragmentById(R.id.nav_host_fragment_content_auth);
-        assert navHostFragment != null;
-        NavController navController = navHostFragment.getNavController();
+//        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().
+//                findFragmentById(R.id.nav_host_fragment_content_auth);
+//        assert navHostFragment != null;
+//        NavController navController = navHostFragment.getNavController();
 
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_auth);
-//        navController.setGraph(R.navigation.auth_navigation);
+        NavController navController = Navigation.findNavController
+                (this, R.id.nav_host_fragment_content_auth);
+        navController.setGraph(R.navigation.auth_navigation);
     }
 
     @Override

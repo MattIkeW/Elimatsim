@@ -17,7 +17,6 @@
             android:name=".AuthenticationActivity"
             android:theme="@style/Theme.Elimatsim.NoActionBar"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
