@@ -9,10 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.elimatsim.R;
 import com.example.elimatsim.databinding.LoginMainBinding;
@@ -33,8 +34,7 @@ public class LoginFragment extends Fragment {
             binding = LoginMainBinding.inflate(inflater, container, false);
             View root = binding.getRoot();
             // Obtain NavController associated with NavHostFragment
-            NavController navController = Navigation.findNavController(requireActivity(),
-                    R.id.nav_host_fragment_content_auth);
+            NavController navController = NavHostFragment.findNavController(this);
 
             EditText logUn = root.findViewById(R.id.loguser);
             EditText signPass = root.findViewById(R.id.logpass);
@@ -57,5 +57,12 @@ public class LoginFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        loginViewModel = new ViewModelProvider(requireActivity()).get(LoginViewModel.class);
+
     }
 }

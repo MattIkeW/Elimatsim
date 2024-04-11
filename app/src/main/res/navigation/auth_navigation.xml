@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/auth_navigation"
     app:startDestination="@+id/nav_login">
+
     <fragment
         android:id="@+id/nav_login"
         android:label="login"
@@ -31,6 +32,6 @@
 
     </fragment>
 
-    <include app:graph="@navigation/mobile_navigation" />
+    <strong> <include app:graph="@navigation/mobile_navigation" /> </strong>
 
 </navigation>

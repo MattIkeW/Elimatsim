@@ -21,29 +21,31 @@ public class SignUpFragment extends Fragment {
     private SignupMainBinding binding;
     private SignUpViewModel signUpViewModel;
     private Boolean session;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        try{
-        binding = SignupMainBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-        signUpViewModel = new ViewModelProvider(requireActivity()).get(SignUpViewModel.class);
+        try {
+            binding = SignupMainBinding.inflate(inflater, container, false);
+            View root = binding.getRoot();
+            signUpViewModel = new ViewModelProvider(requireActivity()).get(SignUpViewModel.class);
 
-        // Obtain NavController associated with NavHostFragment
-        NavController navController = Navigation.findNavController(requireActivity(),
-                R.id.nav_host_fragment_content_auth);
+            // Obtain NavController associated with NavHostFragment
+            NavController navController = Navigation.findNavController(requireActivity(),
+                    R.id.nav_host_fragment_content_auth);
 
-        Button signUp = root.findViewById(R.id.signInButton);
-        signUp.setOnClickListener(v -> {
-            session=signUpViewModel.signIn(root.findViewById(R.id.username).toString(),
-                    root.findViewById(R.id.password).toString(),
-                    root.findViewById(R.id.email).toString(),
-                    root.findViewById(R.id.phoneNum).toString(),
-                    root.findViewById(R.id.name).toString());
-            if(session)
-                navController.navigate(R.id.action_signup_to_login);
-        });
-        return root;} catch (Exception e) {
+            Button signUp = root.findViewById(R.id.signInButton);
+            signUp.setOnClickListener(v -> {
+                session = signUpViewModel.signIn(root.findViewById(R.id.username).toString(),
+                        root.findViewById(R.id.password).toString(),
+                        root.findViewById(R.id.email).toString(),
+                        root.findViewById(R.id.phoneNum).toString(),
+                        root.findViewById(R.id.name).toString());
+                if (session)
+                    navController.navigate(R.id.action_signup_to_login);
+            });
+            return root;
+        } catch (Exception e) {
             Log.e("SignUpFragment", "onCreateView", e);
             throw new RuntimeException(e);
         }

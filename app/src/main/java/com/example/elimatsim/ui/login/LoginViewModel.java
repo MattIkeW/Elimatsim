@@ -15,7 +15,7 @@ import com.example.elimatsim.R;
 public class LoginViewModel extends ViewModel {
     private final MutableLiveData<Boolean> signInResultLiveData = new MutableLiveData<>();
 
-    public boolean login(String uName, String pWord){
+    public boolean login(String uName, String pWord) {
         Amplify.Auth.signIn(uName, pWord,
                 result -> {
                     Log.i("AuthQuickstart", result.isSignedIn() ? "Sign in succeeded" : "Sign in not complete");
@@ -24,7 +24,7 @@ public class LoginViewModel extends ViewModel {
                     } else {
                         signInResultLiveData.postValue(false); // Sign-in failed
                     }
-            },
+                },
                 error -> {
                     Log.e("AuthQuickstart", error.toString());
                     signInResultLiveData.postValue(false); // Sign-in failed

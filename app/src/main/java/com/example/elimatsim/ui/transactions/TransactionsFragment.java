@@ -12,6 +12,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.elimatsim.databinding.FragmentSlideshowBinding;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class TransactionsFragment extends Fragment {
 
     private FragmentSlideshowBinding binding;
@@ -27,6 +32,39 @@ public class TransactionsFragment extends Fragment {
         final TextView textView = binding.textSlideshow;
         transactionsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
+    }
+
+    public void createAccessToken(){
+        try {
+            String urlString = "https://sandbox.momodeveloper.mtn.com/remittance/token/";
+            URL url = new URL(urlString);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            //Request headers
+            connection.setRequestProperty("Authorization", "••••••••••••••••••••");
+
+            connection.setRequestProperty("Ocp-Apim-Subscription-Key", "••••••••••••••••••••••••••••••••");
+
+            connection.setRequestMethod("POST");
+
+            int status = connection.getResponseCode();
+            System.out.println(status);
+
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream())
+            );
+            String inputLine;
+            StringBuffer content = new StringBuffer();
+            while ((inputLine = in.readLine()) != null) {
+                content.append(inputLine);
+            }
+            in.close();
+            System.out.println(content);
+
+            connection.disconnect();
+        } catch (Exception ex) {
+            System.out.print("exception:" + ex.getMessage());
+        }
     }
 
     @Override
