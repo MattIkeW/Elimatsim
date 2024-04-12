@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel;
 import com.example.elimatsim.MoMoAPI;
 
 public class TransactionsViewModel extends ViewModel {
-    private  MoMoAPI apiUser;
 
     private final MutableLiveData<String> mText;
 

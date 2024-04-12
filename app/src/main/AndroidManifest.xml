@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Elimatsim"
         tools:targetApi="31">
+        <!--android:enableOnBackInvokedCallback="true"-->
         <!-- android:name=".AmplifyLogin / .MainActivity -->
         <activity
             android:name=".AuthenticationActivity"
