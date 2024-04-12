@@ -34,9 +34,8 @@ public class TransactionsFragment extends Fragment {
         access.setOnClickListener(v -> new Thread(() -> {
             Log.i("Thread: ", "Thread Starting");
             apiUser = MoMoAPI.getInstance();
-            content = apiUser.bcAuthorize();
             content = apiUser.getAccountBalance();
-            content = apiUser.createAccessToken();
+
         }
         ).start());
 

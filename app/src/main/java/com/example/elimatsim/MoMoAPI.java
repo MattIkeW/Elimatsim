@@ -25,6 +25,10 @@ public class MoMoAPI {
      *  AUTHORIZATION is xReferenceID:API key generated from
      */
     private final String AUTHORIZATION;
+    /*
+     *  Access Token is later used to access other API calls.
+     */
+    private String ACCESS_TOKEN;
 
     private MoMoAPI() {
         UUID uuid = UUID.randomUUID();
@@ -35,10 +39,12 @@ public class MoMoAPI {
             String apiKey = keyExtractor(apiKeyCreate());
             AUTHORIZATION = "Basic " + Base64.getEncoder().encodeToString((getXReferenceID() +
                     ":" + apiKey).getBytes());
+            ACCESS_TOKEN = tokenExtractor(createAccessToken());
         } else {
             Log.i("AUTH", "AUTHORIZATION NOT SET");
             AUTHORIZATION = "";
         }
+
     }
 
     /**
@@ -67,6 +73,19 @@ public class MoMoAPI {
         }
         Log.i("Key Extractor:", "API Key not found.");
         return "";
+    }
+
+    private String tokenExtractor(String input){
+        String regex = "\"access_token\"\\s*:\\s*\"([^\"]+)\"";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+
+        // Check if the matcher finds a match
+        if (matcher.find()) {
+            return matcher.group(1);
+        } else {
+            return "";
+        }
     }
 
     /**
@@ -164,11 +183,12 @@ public class MoMoAPI {
             in.close();
             // System.out.println(content);
             connection.disconnect();
+            Log.i("Access Token", "Created");
             return String.valueOf(content);
         } catch (Exception ex) {
             Log.e("exception:", "Create Access Token");
         }
-        return "Failed to connect";
+        return "";
     }
 
     /**
