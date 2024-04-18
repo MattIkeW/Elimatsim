@@ -5,8 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,32 +14,26 @@ import com.example.elimatsim.MoMoAPI;
 import com.example.elimatsim.databinding.FragmentReflowBinding;
 
 public class FarmersFragment extends Fragment {
-
     private FragmentReflowBinding binding;
     private MoMoAPI apiUser;
-    private FarmersViewModel farmersViewModel;
     private String content;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        farmersViewModel =
-                new ViewModelProvider(this).get(FarmersViewModel.class);
+        FarmersViewModel farmersViewModel = new ViewModelProvider(this).get(FarmersViewModel.class);
 
         binding = FragmentReflowBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        Button invest = binding.investNow;
-
-        invest.setOnClickListener(v -> new Thread(() -> {
+        binding.investNow.setOnClickListener(v -> new Thread(() -> {
             Log.i("Farmers Thread: ", "Thread Starting");
             apiUser = MoMoAPI.getInstance();
             content = apiUser.getAccountBalanceCurr();
-        }));
-
+        }).start());
+        if(content == null)
+            content = "Failed to change content before thread ends";
         farmersViewModel.getText().setValue(content);
-        final TextView textView = binding.textReflow;
-        farmersViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+        // final TextView textView =
+        farmersViewModel.getText().observe(getViewLifecycleOwner(), binding.textReflow::setText);
+        return binding.getRoot();
     }
 
     @Override

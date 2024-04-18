@@ -15,10 +15,6 @@ public class FarmersViewModel extends ViewModel {
                 "To accomplish this, I need a $2570 investment.");
     }
 
-    public void updateText(String word){
-        mText.setValue(word);
-    }
-
     public MutableLiveData<String> getText() {
         return mText;
     }

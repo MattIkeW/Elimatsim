@@ -37,9 +37,8 @@ public class MoMoAPI {
         String apiKey = apiKeyCreate();
         if (!apiKey.isEmpty()) {
             apiKey = keyExtractor(apiKeyCreate());
-            AUTHORIZATION = "Basic " + Base64.getEncoder().encodeToString((getXReferenceID() +
-                    ":" + apiKey).getBytes());
-            ACCESS_TOKEN = tokenExtractor(createAccessToken());
+            AUTHORIZATION = "Basic " + Base64.getEncoder().encodeToString((getXReferenceID() + ":" + apiKey).getBytes());
+            ACCESS_TOKEN = "Bearer " + tokenExtractor(createAccessToken());
         } else {
             Log.i("AUTH", "AUTHORIZATION NOT SET");
             AUTHORIZATION = "";
@@ -48,8 +47,7 @@ public class MoMoAPI {
     }
 
     public static MoMoAPI getInstance() {
-        if (instance == null)
-            instance = new MoMoAPI();
+        if (instance == null) instance = new MoMoAPI();
         return instance;
     }
 
@@ -166,6 +164,14 @@ public class MoMoAPI {
         return "";
     }
 
+    /**
+     * This operation is used to create an access token
+     * which can then be used to authorize and
+     * authenticate towards the other end-points of the API.
+     *
+     * @return A String containing the raw access token
+     * formatted as a random 20 or 60 character string.
+     */
     public String createAccessToken() {
         try {
             Log.i("Create Access Token:", "Creating Access Token");
@@ -198,7 +204,7 @@ public class MoMoAPI {
     }
 
     /**
-     * Get the balance of own account.
+     * Get the balance of account.
      *
      * @return A String representing the account balance.
      */
@@ -219,9 +225,7 @@ public class MoMoAPI {
             int status = connection.getResponseCode();
             Log.i("HTTP code:", String.valueOf(status));
 
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(connection.getInputStream())
-            );
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;
             StringBuilder content = new StringBuilder();
             while ((inputLine = in.readLine()) != null) {
@@ -236,22 +240,28 @@ public class MoMoAPI {
         return "FAILED-TO GET BALANCE";
     }
 
+    /**
+     * This returns the account balance in the specified currency.
+     *
+     * @return A string formatted as JSON containing the currency and Account balance
+     */
     public String getAccountBalanceCurr() {
         try {
-            String urlString = "https://sandbox.momodeveloper.mtn.com/remittance/v1_0/account/balance/{ISO 4217 Code: USD}";
+            Log.i("Get Currency", "In try Block");
+            String urlString = "https://sandbox.momodeveloper.mtn.com/remittance/v1_0/account/balance/USD";
             URL url = new URL(urlString);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             //Request headers
+            connection.setRequestProperty("Authorization", getACCESS_TOKEN());
+            connection.setRequestProperty("X-Target-Environment", "sandbox");
             connection.setRequestProperty("Cache-Control", "no-cache");
             connection.setRequestProperty("Ocp-Apim-Subscription-Key", getPrimaryAPIKey());
             connection.setRequestMethod("GET");
 
             int status = connection.getResponseCode();
             Log.i("HTTP status", String.valueOf(status));
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(connection.getInputStream())
-            );
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;
             StringBuilder content = new StringBuilder();
             while ((inputLine = in.readLine()) != null) {
@@ -261,7 +271,7 @@ public class MoMoAPI {
             connection.disconnect();
             return String.valueOf(content);
         } catch (Exception ex) {
-            Log.e("Get Account Balance Currency:", "Try Failed");
+            Log.e("Get Currency:", "Try Failed");
         }
         return "Failed to get Currency";
     }
