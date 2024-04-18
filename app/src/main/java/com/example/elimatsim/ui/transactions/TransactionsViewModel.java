@@ -1,10 +1,7 @@
 package com.example.elimatsim.ui.transactions;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-import com.example.elimatsim.MoMoAPI;
 
 public class TransactionsViewModel extends ViewModel {
 
@@ -12,11 +9,11 @@ public class TransactionsViewModel extends ViewModel {
 
     public TransactionsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is transactions fragment. List connecting to AWS database. " +
-                "No data available.");
+        mText.setValue("Currency is USD : $10,000");
     }
 
-    public LiveData<String> getText() {
+    public MutableLiveData<String> getText() {
         return mText;
     }
+
 }

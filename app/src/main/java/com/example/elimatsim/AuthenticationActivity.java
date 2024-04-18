@@ -24,14 +24,14 @@ public class AuthenticationActivity extends AppCompatActivity {
 //        ContentAuthBinding binding = ContentAuthBinding.inflate(getLayoutInflater());
 //        setContentView(binding.getRoot());
 
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.nav_host_fragment_content_auth);
+//        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+//                .findFragmentById(R.id.nav_host_fragment_content_auth);
+//
+//        assert navHostFragment != null;
+//        NavController navController = navHostFragment.getNavController();
+//        NavGraph navGraph = navController.getNavInflater().inflate(R.navigation.auth_navigation);
 
-        assert navHostFragment != null;
-        NavController navController = navHostFragment.getNavController();
-        NavGraph navGraph = navController.getNavInflater().inflate(R.navigation.auth_navigation);
-
-        setContentView(R.layout.login_main);
+        setContentView(R.layout.signup_main);
 
         new Thread(this::amplifyInitialize).start();
 

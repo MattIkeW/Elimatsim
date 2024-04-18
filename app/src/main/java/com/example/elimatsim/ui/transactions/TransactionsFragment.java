@@ -9,7 +9,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.elimatsim.MoMoAPI;
@@ -20,31 +22,31 @@ public class TransactionsFragment extends Fragment {
     private MoMoAPI apiUser;
     private FragmentSlideshowBinding binding;
     private String content;
+    private TransactionsViewModel transactionsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        TransactionsViewModel transactionsViewModel =
+        transactionsViewModel =
                 new ViewModelProvider(this).get(TransactionsViewModel.class);
-
         binding = FragmentSlideshowBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         Button access = root.findViewById(R.id.AccessToken);
 
-        access.setOnClickListener(v -> new Thread(() -> {
-            Log.i("Thread: ", "Thread Starting");
-            apiUser = MoMoAPI.getInstance();
-            content = apiUser.getAccountBalance();
-
-        }
-        ).start());
+        access.setOnClickListener(v -> {
+            new Thread(() -> {
+                Log.i("Transactions Thread: ", "Thread Starting");
+                apiUser = MoMoAPI.getInstance();
+                content = apiUser.getAccountBalance();
+            }
+            ).start();
+            transactionsViewModel.getText().setValue(content);
+        });
 
         final TextView textView = binding.textSlideshow;
-        textView.setText(content);
-        //transactionsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        transactionsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
-
 
     @Override
     public void onDestroyView() {

@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.farmers.FarmersFragment">
 
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/avatar_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBaseline_toTopOf="@id/text_reflow"
+        android:contentDescription="Image of a farmer" />
+
     <TextView
         android:id="@+id/text_reflow"
         android:layout_width="match_parent"
@@ -18,6 +28,17 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/avatar"
+        app:layout_constraintVertical_bias="0.498" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/investNow"
+        android:text="INVEST NOW"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/avatar"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

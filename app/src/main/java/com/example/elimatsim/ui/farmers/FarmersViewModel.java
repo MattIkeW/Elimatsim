@@ -10,14 +10,16 @@ public class FarmersViewModel extends ViewModel {
 
     public FarmersViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This will be an overview page of account balances / investments." +
-                " Note that each farmer will explicitly describe the terms of investment. " +
-                "Categories will be provided on the list view and the are " +
-                "short term (1 - 2 years ROI and dividend breakdowns), long term(5 - 10 ROI) " +
-                "and industrial (Company live dividends but at least 10 yrs ROI.");
+        mText.setValue("Yello, I am Kato. I run a fish farm in Namayingo district on the " +
+                "shores of lake Victoria. I would like to expand my pond to contain 50 tilapia. " +
+                "To accomplish this, I need a $2570 investment.");
     }
 
-    public LiveData<String> getText() {
+    public void updateText(String word){
+        mText.setValue(word);
+    }
+
+    public MutableLiveData<String> getText() {
         return mText;
     }
 }

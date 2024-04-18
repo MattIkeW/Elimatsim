@@ -17,12 +17,11 @@ import java.util.regex.Pattern;
  * Builder or Factory design pattern may be applicable for HttpConnections at the start of the API calls.
  */
 public class MoMoAPI {
-
     private static MoMoAPI instance;
     private final String xReferenceID;
     private final String primaryAPIKey;
     /*
-     *  AUTHORIZATION is xReferenceID:API key generated from
+     *  AUTHORIZATION is xReferenceID:API key generated from. Basic uuid:apikey -> encoded to base64
      */
     private final String AUTHORIZATION;
     /*
@@ -35,8 +34,9 @@ public class MoMoAPI {
         xReferenceID = uuid.toString();
         primaryAPIKey = "2b6ecd81af2a4e999557cc9192e2dd00";
         apiUserCreate();
-        if (!apiKeyCreate().isEmpty()) {
-            String apiKey = keyExtractor(apiKeyCreate());
+        String apiKey = apiKeyCreate();
+        if (!apiKey.isEmpty()) {
+            apiKey = keyExtractor(apiKeyCreate());
             AUTHORIZATION = "Basic " + Base64.getEncoder().encodeToString((getXReferenceID() +
                     ":" + apiKey).getBytes());
             ACCESS_TOKEN = tokenExtractor(createAccessToken());
@@ -45,6 +45,12 @@ public class MoMoAPI {
             AUTHORIZATION = "";
         }
 
+    }
+
+    public static MoMoAPI getInstance() {
+        if (instance == null)
+            instance = new MoMoAPI();
+        return instance;
     }
 
     /**
@@ -75,7 +81,7 @@ public class MoMoAPI {
         return "";
     }
 
-    private String tokenExtractor(String input){
+    private String tokenExtractor(String input) {
         String regex = "\"access_token\"\\s*:\\s*\"([^\"]+)\"";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
@@ -127,6 +133,7 @@ public class MoMoAPI {
 
     /**
      * Used to create an API key for an API user (xReferenceID) in the sandbox target environment.
+     * Created from xReferenceID
      */
     private String apiKeyCreate() {
         try {
@@ -181,52 +188,11 @@ public class MoMoAPI {
                 content.append(inputLine);
             }
             in.close();
-            // System.out.println(content);
             connection.disconnect();
             Log.i("Access Token", "Created");
             return String.valueOf(content);
         } catch (Exception ex) {
             Log.e("exception:", "Create Access Token");
-        }
-        return "";
-    }
-
-    /**
-     * This operation is used to claim a consent by the account holder for the requested scopes.
-     *
-     * @return The string representing the result of the HTTP request.
-     */
-    public String bcAuthorize() {
-        try {
-            String urlString = "https://sandbox.momodeveloper.mtn.com/remittance/v1_0/bc-authorize";
-            URL url = new URL(urlString);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-            //Request headers
-            connection.setRequestProperty("Authorization", getAUTHORIZATION());
-            connection.setRequestProperty("X-Target-Environment", "sandbox");
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            connection.setRequestProperty("Cache-Control", "no-cache");
-            connection.setRequestProperty("Ocp-Apim-Subscription-Key", getPrimaryAPIKey());
-            connection.setRequestMethod("POST");
-
-            // Request body
-            connection.setDoOutput(true);
-            connection.getOutputStream().write("login_hint=ID:{msisdn}/MSISDN&scope={scope}&access_type={online/offline}".getBytes());
-            int status = connection.getResponseCode();
-            Log.i("HTTP Status Code:", String.valueOf(status));
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String inputLine;
-            StringBuilder content = new StringBuilder();
-            while ((inputLine = in.readLine()) != null) {
-                content.append(inputLine);
-            }
-            in.close();
-            connection.disconnect();
-            return String.valueOf(content);
-        } catch (Exception ex) {
-            Log.e("BC-Authorize", "Something's wrong");
         }
         return "";
     }
@@ -244,7 +210,7 @@ public class MoMoAPI {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             //Request headers
-            connection.setRequestProperty("Authorization", getAUTHORIZATION());
+            connection.setRequestProperty("Authorization", getACCESS_TOKEN());
             connection.setRequestProperty("X-Target-Environment", "sandbox");
             connection.setRequestProperty("Cache-Control", "no-cache");
             connection.setRequestProperty("Ocp-Apim-Subscription-Key", getPrimaryAPIKey());
@@ -267,7 +233,37 @@ public class MoMoAPI {
         } catch (Exception ex) {
             Log.e("Get Account Balance:", "Try Failed");
         }
-        return "";
+        return "FAILED-TO GET BALANCE";
+    }
+
+    public String getAccountBalanceCurr() {
+        try {
+            String urlString = "https://sandbox.momodeveloper.mtn.com/remittance/v1_0/account/balance/{ISO 4217 Code: USD}";
+            URL url = new URL(urlString);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            //Request headers
+            connection.setRequestProperty("Cache-Control", "no-cache");
+            connection.setRequestProperty("Ocp-Apim-Subscription-Key", getPrimaryAPIKey());
+            connection.setRequestMethod("GET");
+
+            int status = connection.getResponseCode();
+            Log.i("HTTP status", String.valueOf(status));
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream())
+            );
+            String inputLine;
+            StringBuilder content = new StringBuilder();
+            while ((inputLine = in.readLine()) != null) {
+                content.append(inputLine);
+            }
+            in.close();
+            connection.disconnect();
+            return String.valueOf(content);
+        } catch (Exception ex) {
+            Log.e("Get Account Balance Currency:", "Try Failed");
+        }
+        return "Failed to get Currency";
     }
 
     private String getXReferenceID() {
@@ -282,8 +278,7 @@ public class MoMoAPI {
         return AUTHORIZATION;
     }
 
-    public static MoMoAPI getInstance() {
-        if (instance == null) instance = new MoMoAPI();
-        return instance;
+    private String getACCESS_TOKEN() {
+        return ACCESS_TOKEN;
     }
 }

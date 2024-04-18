@@ -15,7 +15,7 @@ public class HomeViewModel extends ViewModel {
         mTexts = new MutableLiveData<>();
         List<String> texts = new ArrayList<>();
         for (int i = 1; i <= 16; i++) {
-            texts.add("Farmer # " + i);
+            texts.add("Farmer # " + i + "\t$" + 2570 * i);
         }
         mTexts.setValue(texts);
     }

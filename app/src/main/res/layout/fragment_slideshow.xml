@@ -10,7 +10,7 @@
         android:id="@+id/AccessToken"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/access_token"
+        android:text="Get Account Balance"
         app:layout_constraintBottom_toTopOf="@+id/text_slideshow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
